@@ -92,7 +92,10 @@ module OmniAuth
       end
 
       def set_options_from_identifier
-        username, domain         = identifier.split('@')
+        if identifier
+          @@identifier = identifier
+        end
+        username, domain         = @@identifier.split('@')
         client_id, client_secret = options.credentials.call(domain, callback_url)
 
         options.identifier            = identifier
